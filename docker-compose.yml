@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+
+  db:
+    container_name: ecommerce_db
+    image: postgres
+    restart: always
+    env_file: ./.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  app:
+    build: ./app
+    container_name: ecommerce_app
+    env_file: ./.env
+    command: /app/runserver.sh
+    volumes:
+      - ./app:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+volumes:
+  db_data:
