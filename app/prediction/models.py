@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class Prediction(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to='media/img/prediction/', null=True, blank=True)
+    image = models.ImageField(upload_to='images/prediction/', null=True, blank=True)
     title = models.CharField(max_length=160)
     description = models.TextField(null=True, blank=True)
     price = models.IntegerField(null=True, blank=True)
