@@ -95,17 +95,15 @@
                                         <div class="card">
                                             <div class="thumb-content">
                                                 <div class="price">{{ prediction.price }}</div>
-                                                <a href="single.html">
                                                     <img class="card-img-top img-fluid"
      														src="{% if prediction.image %} {{ prediction.image.url }} {% else %} /static/images/prediction_default.jpg {% endif %}"
      														alt="Card image cap">
-                                                </a>
                                             </div>
                                             <div class="card-body">
-                                                <h4 class="card-title"><a href="{% url 'detail' prediction.pk %}">{{ prediction.title }}</a></h4>
+                                                <h4 class="card-title"><a href="{{ prediction.get_absolute_url }}">{{ prediction.title }}</a></h4>
                                                 <ul class="list-inline product-meta">
                                                     <li class="list-inline-item">
-                                                        <a href="category.html"><i class="fa fa-calendar"></i>{{ prediction.published_date }}</a>
+                                                        <i class="fa fa-calendar"></i>{{ prediction.published_date }}
                                                     </li>
                                                 </ul>
                                                 <p class="card-text">{{ prediction.description }}</p>

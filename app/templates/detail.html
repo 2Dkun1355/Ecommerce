@@ -61,8 +61,8 @@
 							<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 								<h3 class="tab-title">Description</h3>
 								<img class="card-img-top img-fluid"
-     														src="{% if prediction.image %} {{ prediction.image.url }} {% else %} /static/images/prediction_default.jpg {% endif %}"
-     														alt="Card image cap">
+										src="{% if prediction.image %} {{ prediction.image.url }} {% else %} /static/images/prediction_default.jpg {% endif %}"
+										alt="Card image cap">
 								<p>{{ object.description }}</p>
 							</div>
 
@@ -185,10 +185,23 @@
 					<!-- User Profile widget -->
 					<div class="widget user text-center">
 						<h4><a href="user-profile.html">{{ object.user.username }}</a></h4>
-						<ul class="list-inline mt-20">
-							<li class="list-inline-item"><a href="single.html" class="btn btn-offer d-inline-block btn-primary ml-n1 my-1 px-lg-4 px-md-3">Make an
-									offer</a></li>
-						</ul>
+
+						<div class="col-md-6">
+							<form method='post' action="{% url 'prediction_create' %}">
+								{% csrf_token %}
+								<fieldset class="p-4">
+									<div class="form-group">
+										{{ form.as_p }}
+<!--										<div class="row">-->
+<!--										</div>-->
+									</div>
+
+									<div class="btn-grounp">
+										<button type="submit" class="btn btn-primary mt-2 float-right">SUBMIT</button>
+									</div>
+								</fieldset>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
