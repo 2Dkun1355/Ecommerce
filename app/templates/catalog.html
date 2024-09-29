@@ -35,11 +35,11 @@
 </section>
 -->
 
-<section class="section-sm">
+<section class="section bg-gray">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="search-result bg-gray">
+                <div class="search-result bg-white">
                     <h2>Results For "Electronics"</h2>
                     <p>{{ predictions|length }} Results on Today</p>
                 </div>
@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div class="col-lg-9 col-md-8">
-                <div class="category-search-filter">
+                <div class="category-search-filter bg-white">
                     <div class="row">
                         <div class="col-md-6 text-center text-md-left">
                             <strong>Short</strong>
@@ -70,19 +70,6 @@
                                 <option value="2">Lowest Price</option>
                                 <option value="4">Highest Price</option>
                             </select>
-                        </div>
-                        <div class="col-md-6 text-center text-md-right mt-2 mt-md-0">
-                            <div class="view">
-                                <strong>Views</strong>
-                                <ul class="list-inline view-switcher">
-                                    <li class="list-inline-item">
-                                        <a href="#!" onclick="event.preventDefault();" class="text-info"><i class="fa fa-th-large"></i></a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="ad-list-view.html"><i class="fa fa-reorder"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -95,20 +82,18 @@
                                         <div class="card">
                                             <div class="thumb-content">
                                                 <div class="price">{{ prediction.price }}</div>
-                                                <a href="single.html">
                                                     <img class="card-img-top img-fluid"
      														src="{% if prediction.image %} {{ prediction.image.url }} {% else %} /static/images/prediction_default.jpg {% endif %}"
-     														alt="Card image cap">
-                                                </a>
+     														style="width: 300px; height: 200px; object-fit: cover;">
                                             </div>
                                             <div class="card-body">
-                                                <h4 class="card-title"><a href="{% url 'detail' prediction.pk %}">{{ prediction.title }}</a></h4>
+                                                <h4 class="card-title"><a href="{{ prediction.get_absolute_url }}">{{ prediction.title|slice:":20" }}</a></h4>
                                                 <ul class="list-inline product-meta">
                                                     <li class="list-inline-item">
-                                                        <a href="category.html"><i class="fa fa-calendar"></i>{{ prediction.published_date }}</a>
+                                                        <i class="fa fa-calendar"></i>{{ prediction.published_date }}
                                                     </li>
                                                 </ul>
-                                                <p class="card-text">{{ prediction.description }}</p>
+                                                <p class="card-text">{{ prediction.description|slice:":50" }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -126,8 +111,8 @@
                                     <span class="sr-only">Previous</span>
                                 </a>
                             </li>
-                            <li class="page-item"><a class="page-link" href="category.html">1</a></li>
-                            <li class="page-item active"><a class="page-link" href="category.html">2</a></li>
+                            <li class="page-item active"><a class="page-link" href="category.html">1</a></li>
+                            <li class="page-item"><a class="page-link" href="category.html">2</a></li>
                             <li class="page-item"><a class="page-link" href="category.html">3</a></li>
                             <li class="page-item">
                                 <a class="page-link" href="category.html" aria-label="Next">

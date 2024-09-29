@@ -61,7 +61,7 @@
 
 								<!-- Dropdown list -->
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item @@dashboardPage" href="dashboard.html">Dashboard</a></li>
+                                    <li><a class="dropdown-item @@dashboardPage" href="{% url 'dashboard' %}">Dashboard</a></li>
 									<li><a class="dropdown-item @@dashboardMyAds" href="dashboard-my-ads.html">Dashboard My Ads</a></li>
 									<li><a class="dropdown-item @@dashboardFavouriteAds" href="dashboard-favourite-ads.html">Dashboard Favourite Ads</a></li>
 									<li><a class="dropdown-item @@dashboardArchivedAds" href="dashboard-archived-ads.html">Dashboard Archived Ads</a></li>
@@ -120,7 +120,8 @@
 								<a class="nav-link login-button" href="login.html">Login</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link text-white add-button" href="ad-listing.html"><i class="fa fa-plus-circle"></i> Add Listing</a>
+								<a class="nav-link text-white add-button" href="{% url 'create_prediction' %}"><i class="fa fa-plus-circle"></i> Add Listing</a>
+
 							</li>
 						</ul>
 					</div>

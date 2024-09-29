@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="advt-post bg-gray py-5">
+  <div class="container">
+    <form action="{% url 'create_prediction' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.user }}
+
+      <fieldset class="border border-gray px-3 px-md-4 py-4 mb-5">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3>Post Your ad</h3>
+          </div>
+          <div class="col-lg-6">
+            <h6 class="font-weight-bold pt-4 pb-1">Title Of Ad:</h6>
+            {{ form.title }}
+
+            <h6 class="font-weight-bold pt-4 pb-1">Description:</h6>
+            {{ form.description }}
+            <h6 class="font-weight-bold pt-4 pb-1">Item Price ($ USD):</h6>
+            <div class="row px-3">
+              <div class="col-lg-4 rounded my-2 px-0">
+                {{ form.price }}
+              </div>
+            </div>
+
+            <div class="choose-file text-center my-4 py-4 rounded bg-white">
+              <label>
+                <span class="d-block font-weight-bold text-dark">Drop files anywhere to upload</span>
+                <span class="d-block">or</span>
+                {{ form.image }}
+                <span class="d-block">Maximum upload file size: 500 KB</span>
+              </label>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <h6 class="font-weight-bold pt-4 pb-1">Location:</h6>
+            <div class="row px-3">
+              <div class="col-lg-4 rounded my-2 px-0">
+                {{ form.location }}
+              </div>
+            </div>
+
+            <h6 class="font-weight-bold pt-4 pb-1">Is Active:</h6>
+            <div class="row px-3">
+              <div class="col-lg-4 mr-lg-4 my-2 pt-2 pb-1 rounded bg-white">
+                {{ form.is_active }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="checkbox d-inline-flex">
+        <input type="checkbox" id="terms-&-condition" class="mt-1" required>
+        <label for="terms-&-condition" class="ml-2">By clicking you must agree with our
+          <span><a class="text-success" href="terms-condition.html">Terms & Condition and Posting Rules.</a></span>
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary d-block mt-2">Post Your Ad</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

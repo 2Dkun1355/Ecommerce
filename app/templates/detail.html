@@ -1,198 +1,70 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!--<section class="page-search">-->
-<!--	<div class="container">-->
-<!--		<div class="row">-->
-<!--			<div class="col-md-12">-->
-<!--				&lt;!&ndash; Advance Search &ndash;&gt;-->
-<!--				<div class="advance-search nice-select-white">-->
-<!--					<form>-->
-<!--						<div class="form-row align-items-center">-->
-<!--							<div class="form-group col-xl-4 col-lg-3 col-md-6">-->
-<!--								<input type="text" class="form-control my-2 my-lg-0" id="inputtext4" placeholder="What are you looking for">-->
-<!--							</div>-->
-<!--							<div class="form-group col-lg-3 col-md-6">-->
-<!--								<select class="w-100 form-control my-2 my-lg-0">-->
-<!--									<option>Category</option>-->
-<!--									<option value="1">Top rated</option>-->
-<!--									<option value="2">Lowest Price</option>-->
-<!--									<option value="4">Highest Price</option>-->
-<!--								</select>-->
-<!--							</div>-->
-<!--							<div class="form-group col-lg-3 col-md-6">-->
-<!--								<input type="text" class="form-control my-2 my-lg-0" id="inputLocation4" placeholder="Location">-->
-<!--							</div>-->
-<!--							<div class="form-group col-xl-2 col-lg-3 col-md-6">-->
-
-<!--								<button type="submit" class="btn btn-primary active w-100">Search Now</button>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--					</form>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
-<!--</section>-->
-
-<section class="section bg-gray">
+<section class="section bg-gray py-5">
 	<!-- Container Start -->
 	<div class="container">
 		<div class="row">
-			<!-- Left sidebar -->
+			<!-- Left sidebar (Product Details) -->
 			<div class="col-lg-8">
-				<div class="product-details">
-					<h1 class="product-title">{{ object.title }}</h1>
-					<div class="product-meta">
+				<div class="product-details p-4 bg-white shadow-sm rounded">
+					<h1 class="product-title text-center mb-4">{{ object.title }}</h1>
+					<div class="product-meta text-center mb-3">
 						<ul class="list-inline">
-							<li class="list-inline-item"><i class="fa fa-user-o"></i> By <a href="user-profile.html">{{ object.user.username }}</a></li>
-<!--							<li class="list-inline-item"><i class="fa fa-folder-open-o"></i> Category<a href="category.html">Electronics</a></li>-->
-							<li class="list-inline-item"><i class="fa fa-location-arrow"></i> Location<a href="category.html">{{ object.location }}</a></li>
+							<li class="list-inline-item"><i class="fa fa-user-o"></i> By {{ object.user.username }}</li>
+							<li class="list-inline-item"><i class="fa fa-location-arrow"></i> Location: {{ object.location }}</li>
 						</ul>
 					</div>
-					<div class="content mt-5 pt-5">
-						<ul class="nav nav-pills  justify-content-center" id="pills-tab" role="tablist">
-							<li class="nav-item">
-								<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home"
-								 aria-selected="true">Details</a>
-					</li>
-						</ul>
-						<div class="tab-content" id="pills-tabContent">
-							<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-								<h3 class="tab-title">Description</h3>
-								<img class="card-img-top img-fluid"
-     														src="{% if prediction.image %} {{ prediction.image.url }} {% else %} /static/images/prediction_default.jpg {% endif %}"
-     														alt="Card image cap">
-								<p>{{ object.description }}</p>
-							</div>
 
-<!--							<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">-->
-<!--								<h3 class="tab-title">Product Specifications</h3>-->
-<!--								<table class="table table-bordered product-table">-->
-<!--									<tbody>-->
-<!--										<tr>-->
-<!--											<td>Seller Price</td>-->
-<!--											<td>{{ object.price }}</td>-->
-<!--										</tr>-->
-<!--										<tr>-->
-<!--											<td>Added</td>-->
-<!--											<td>{{ object.published_date }}</td>-->
-<!--										</tr>-->
-<!--										<tr>-->
-<!--											<td>State</td>-->
-<!--											<td>Dhaka</td>-->
-<!--										</tr>-->
-<!--										<tr>-->
-<!--											<td>Brand</td>-->
-<!--											<td>Apple</td>-->
-<!--										</tr>-->
-<!--										<tr>-->
-<!--											<td>Condition</td>-->
-<!--											<td>Used</td>-->
-<!--										</tr>-->
-<!--										<tr>-->
-<!--											<td>Model</td>-->
-<!--											<td>2017</td>-->
-<!--										</tr>-->
-<!--										<tr>-->
-<!--											<td>State</td>-->
-<!--											<td>Dhaka</td>-->
-<!--										</tr>-->
-<!--										<tr>-->
-<!--											<td>Battery Life</td>-->
-<!--											<td>23</td>-->
-<!--										</tr>-->
-<!--									</tbody>-->
-<!--								</table>-->
-<!--							</div>-->
-<!--							<div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">-->
-<!--								<h3 class="tab-title">Product Review</h3>-->
-<!--								<div class="product-review">-->
-<!--									<div class="media">-->
-<!--										&lt;!&ndash; Avater &ndash;&gt;-->
-<!--										<img src="images/user/user-thumb.jpg" alt="avater">-->
-<!--										<div class="media-body">-->
-<!--											&lt;!&ndash; Ratings &ndash;&gt;-->
-<!--											<div class="ratings">-->
-<!--												<ul class="list-inline">-->
-<!--													<li class="list-inline-item">-->
-<!--														<i class="fa fa-star"></i>-->
-<!--													</li>-->
-<!--													<li class="list-inline-item">-->
-<!--														<i class="fa fa-star"></i>-->
-<!--													</li>-->
-<!--													<li class="list-inline-item">-->
-<!--														<i class="fa fa-star"></i>-->
-<!--													</li>-->
-<!--													<li class="list-inline-item">-->
-<!--														<i class="fa fa-star"></i>-->
-<!--													</li>-->
-<!--													<li class="list-inline-item">-->
-<!--														<i class="fa fa-star"></i>-->
-<!--													</li>-->
-<!--												</ul>-->
-<!--											</div>-->
-<!--											<div class="name">-->
-<!--												<h5>Jessica Brown</h5>-->
-<!--											</div>-->
-<!--											<div class="date">-->
-<!--												<p>Mar 20, 2018</p>-->
-<!--											</div>-->
-<!--											<div class="review-comment">-->
-<!--												<p>-->
-<!--													Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremqe laudant tota rem ape-->
-<!--													riamipsa eaque.-->
-<!--												</p>-->
-<!--											</div>-->
-<!--										</div>-->
-<!--									</div>-->
-<!--									<div class="review-submission">-->
-<!--										<h3 class="tab-title">Submit your review</h3>-->
-<!--										&lt;!&ndash; Rate &ndash;&gt;-->
-<!--										<div class="rate">-->
-<!--											<div class="starrr"></div>-->
-<!--										</div>-->
-<!--										<div class="review-submit">-->
-<!--											<form action="#" method="POST" class="row">-->
-<!--												<div class="col-lg-6 mb-3">-->
-<!--													<input type="text" name="name" id="name" class="form-control" placeholder="Name" required>-->
-<!--												</div>-->
-<!--												<div class="col-lg-6 mb-3">-->
-<!--													<input type="email" name="email" id="email" class="form-control" placeholder="Email" required>-->
-<!--												</div>-->
-<!--												<div class="col-12 mb-3">-->
-<!--													<textarea name="review" id="review" rows="6" class="form-control" placeholder="Message" required></textarea>-->
-<!--												</div>-->
-<!--												<div class="col-12">-->
-<!--													<button type="submit" class="btn btn-main">Sumbit</button>-->
-<!--												</div>-->
-<!--											</form>-->
-<!--										</div>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</div>-->
+					<!-- Image block -->
+					<div class="text-center mb-4">
+						<img class="card-img-top img-fluid mx-auto d-block mb-3"
+     						 src="{% if prediction.image %} {{ prediction.image.url }} {% else %} /static/images/prediction_default.jpg {% endif %}"
+     						 alt="Product image">
+					</div>
 
+					<!-- Navigation Pills -->
+					<div class="content">
+<!--						<ul class="nav nav-pills justify-content-center mb-4" id="pills-tab" role="tablist">-->
+<!--							<li class="nav-item">-->
+<!--								<a class="nav-link active btn-primary" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home"-->
+<!--								 aria-selected="true">Details</a>-->
+<!--							</li>-->
+<!--						</ul>-->
+						<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+							<h3 class="tab-title mb-4">Description</h3>
+							<p>{{ object.description }}</p>
 						</div>
 					</div>
 				</div>
 			</div>
+
+			<!-- Right sidebar (User Info & Price) -->
 			<div class="col-lg-4">
 				<div class="sidebar">
-					<div class="widget price text-center">
+					<!-- Price Widget -->
+					<div class="widget price text-center p-4 bg-primary text-white shadow-sm rounded mb-4">
 						<h4>Price</h4>
-						<p>{{ object.price }}</p>
+						<p class="display-4">{{ object.price }} $</p>
 					</div>
-					<!-- User Profile widget -->
-					<div class="widget user text-center">
-						<h4><a href="user-profile.html">{{ object.user.username }}</a></h4>
-						<ul class="list-inline mt-20">
-							<li class="list-inline-item"><a href="single.html" class="btn btn-offer d-inline-block btn-primary ml-n1 my-1 px-lg-4 px-md-3">Make an
-									offer</a></li>
-						</ul>
+
+					<!-- User Profile Widget -->
+					<div class="widget user text-center p-4 bg-white shadow-sm rounded">
+						<h4>{{ user.username }}</h4>
+						<form method='post' action="{% url 'create_offer' %}">
+								{% csrf_token %}
+							<fieldset class="p-4">
+								<div class="form-group">
+									{{ form.as_p }}
+								</div>
+								<div class="btn-grounp">
+									<button type="submit" class="btn btn-primary mt-2">SUBMIT</button>
+								</div>
+							</fieldset>
+						</form>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 </section>
