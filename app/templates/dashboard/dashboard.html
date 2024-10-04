@@ -22,14 +22,24 @@
           <!-- Dashboard Links -->
           <div class="widget user-dashboard-menu">
             <ul>
-              <li class="active"><a href="dashboard-my-ads.html"><i class="fa fa-user"></i> My Ads<span>{{ predictions|length }}</span></a></li>
+              <li class="active"><a href="dashboard-my-ads.html"><i class="fa fa-th-list"></i> My Ads<span>{{ predictions|length }}</span></a></li>
               <li><a href="dashboard-favourite-ads.html"><i class="fa fa-bookmark-o"></i> Favourite Ads
                   <span>5</span></a></li>
               <li><a href="dashboard-archived-ads.html"><i class="fa fa-file-archive-o"></i>Archived Ads
                   <span>12</span></a></li>
               <li><a href="dashboard-pending-ads.html"><i class="fa fa-bolt"></i> Pending Approval<span>23</span></a>
               </li>
-              <li><a href="index.html"><i class="fa fa-cog"></i> Logout</a></li>
+
+
+              {% if user.is_authenticated %}
+              <form id='logout_form' action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+              </form>
+              <li><a href="javascript:;" onclick="document.getElementById('logout_form').submit()"><i class="fa fa-cog"></i> Logout</a></a></li>
+              {% endif %}
+
+
+
               <li><a href="#!" data-toggle="modal" data-target="#deleteaccount"><i class="fa fa-power-off"></i>Delete Account</a></li>
             </ul>
           </div>
