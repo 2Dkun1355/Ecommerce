@@ -99,17 +99,17 @@
                   <div class="">
                     <ul class="list-inline justify-content-center">
                       <li class="list-inline-item">
-                        <a data-toggle="tooltip" data-placement="top" title="Detail" class="view" href="{{ prediction.get_absolute_url }}">
+                        <a data-toggle="tooltip" data-placement="top" title="Detail" class="view" href="{{ prediction.get_detail_url }}">
                           <i class="fa fa-eye"></i>
                         </a>
                       </li>
                       <li class="list-inline-item">
-                        <a class="edit" data-toggle="tooltip" data-placement="top" title="Edit" href="dashboard.html">
+                        <a class="edit" data-toggle="tooltip" data-placement="top" title="Edit" href="{{ prediction.get_update_url }}">
                           <i class="fa fa-pencil"></i>
                         </a>
                       </li>
                       <li class="list-inline-item">
-                        <a class="delete" data-toggle="tooltip" data-placement="top" title="Delete" href="dashboard.html">
+                        <a class="delete" data-toggle="tooltip" data-placement="top" title="Delete" href="{{ prediction.get_delete_url }}">
                           <i class="fa fa-trash"></i>
                         </a>
                       </li>

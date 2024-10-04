@@ -1,21 +1,23 @@
 from audioop import reverse
-
 from django.template.context_processors import request
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView
-
-from prediction.forms import PredictionOfferForm, PredictionCreateForm
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from prediction.forms import PredictionOfferForm, PredictionForm
 from prediction.models import Prediction
 
 
 class PredictionListViews(ListView):
     model = Prediction
-    template_name = 'catalog.html'
+    template_name = 'prediction/catalog.html'
     context_object_name = 'predictions'
+
+    def get_queryset(self):
+        return Prediction.objects.filter(is_active=True)
+
 
 class PredictionDetailViews(DetailView):
     model = Prediction
-    template_name = 'detail.html'
+    template_name = 'prediction/detail.html'
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data()
@@ -34,27 +36,37 @@ class PredictionOfferCreateViews(CreateView):
 
 
 class PredictionCreateViews(CreateView):
-    form_class = PredictionCreateForm
+    form_class = PredictionForm
+    template_name = 'prediction/create.html'
     success_url = reverse_lazy('catalog')
-    template_name = 'create_prediction.html'
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data()
-        form = PredictionCreateForm()
+        form = self.get_form()
 
         form.fields['user'].initial = self.request.user
+        form.fields['view'] = "{% url 'prediction_create' %}"
 
         context_data['form'] = form
         return context_data
 
 
-class UserPredictionListViews(ListView):
+class PredictionUpdateViews(UpdateView):
     model = Prediction
-    template_name = 'dashboard.html'
-    context_object_name = 'predictions'
+    form_class = PredictionForm
+    template_name = 'prediction/create.html'
+    success_url = reverse_lazy('detail')
 
-    def get_queryset(self):
-        user = self.request.user
-        if user.is_authenticated:
-            return Prediction.objects.filter(user=user)
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data()
+        form = self.get_form()
 
+        form.fields['view'] = "{% url 'prediction_update' %}"
+
+        context_data['form'] = form
+        return context_data
+
+
+class PredictionDeleteViews(DeleteView):
+    model = Prediction
+    success_url = reverse_lazy('detail')

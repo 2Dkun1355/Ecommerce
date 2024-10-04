@@ -13,8 +13,15 @@ class Prediction(models.Model):
     update_date = models.DateField(auto_now=True)
     is_active = models.BooleanField(default=True)
 
-    def get_absolute_url(self):
+    def get_detail_url(self):
         return reverse('detail', kwargs={'pk': self.pk})
+
+    def get_update_url(self):
+        return reverse('prediction_update', kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse('prediction_delete', kwargs={'pk': self.pk})
+
 
 
 class PredictionOffer(models.Model):

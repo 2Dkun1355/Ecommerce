@@ -51,7 +51,7 @@
 					<!-- User Profile Widget -->
 					<div class="widget user text-center p-4 bg-white shadow-sm rounded">
 						<h4>{{ user.username }}</h4>
-						<form method='post' action="{% url 'create_offer' %}">
+						<form method='post' action="{% url 'offer_create' %}">
 								{% csrf_token %}
 							<fieldset class="p-4">
 								<div class="form-group">

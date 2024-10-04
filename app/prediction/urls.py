@@ -1,11 +1,12 @@
 from django.urls import path
 from prediction.views import PredictionListViews, PredictionDetailViews, PredictionOfferCreateViews, \
-    UserPredictionListViews, PredictionCreateViews
+    PredictionCreateViews, PredictionUpdateViews, PredictionDeleteViews
 
 urlpatterns = [
     path('catalog/', PredictionListViews.as_view(), name='catalog'),
-    path('catalog/<pk>/', PredictionDetailViews.as_view(), name='detail'),
-    path('create/', PredictionOfferCreateViews.as_view(), name='create_offer'),
-    path('dashboard/', UserPredictionListViews.as_view(), name='dashboard'),
-    path('create_prediction/', PredictionCreateViews.as_view(), name='create_prediction')
+    path('detail/<pk>/', PredictionDetailViews.as_view(), name='detail'),
+    path('update/<pk>/', PredictionUpdateViews.as_view(), name='prediction_update'),
+    path('delete/<pk>/', PredictionDeleteViews.as_view(), name='prediction_delete'),
+    path('create/', PredictionCreateViews.as_view(), name='prediction_create'),
+    path('offer/create/', PredictionOfferCreateViews.as_view(), name='offer_create'),
 ]
