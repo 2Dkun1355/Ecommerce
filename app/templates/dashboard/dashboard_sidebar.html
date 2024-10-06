@@ -1,0 +1,31 @@
+<div class="col-lg-4">
+        <div class="sidebar">
+          <!-- User Widget -->
+          <div class="widget user-dashboard-profile">
+            <!-- User Image -->
+            <div class="profile-thumb">
+              <img src="images/user/user-thumb.jpg" alt="" class="rounded-circle">
+            </div>
+            <!-- User Name -->
+            <h5 class="text-center">{{ user.last_name }} {{ user.first_name }}</h5>
+            <p><time>{{ user.date_joined|date:"d F Y" }}</time></p>
+            <a href="user-profile.html" class="btn btn-main-sm">Налаштувати аккаунт</a>
+          </div>
+          <!-- Dashboard Links -->
+          <div class="widget user-dashboard-menu">
+            <ul>
+              <li {% if action == 'dashboard' %} class="active" {% endif %}><a href="{% url 'dashboard' %}"><i class="fa fa-user"></i> Мої оголошення<span>{{ prediction }}</span></a></li>
+              <li {% if action == 'my_feedback' %} class="active" {% endif %}><a href="{% url 'dashboard_my_feedback' %}"><i class="fa fa-bookmark-o"></i> Мої відгуки
+                  <span>{{ my_feedback }}</span></a></li>
+              <li {% if action == 'user_feedback' %} class="active" {% endif %}><a href="{% url 'dashboard_user_feedback' %}"><i class="fa fa-file-archive-o"></i> Відгуки на оголошення
+                  <span>{{ user_feedback }}</span></a></li>
+              {% if user.is_authenticated %}
+              <form id='logout_form' action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+              </form>
+              <li><a href="javascript:;" onclick="document.getElementById('logout_form').submit()"><i class="fa fa-cog"></i> Вихід</a></a></li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>

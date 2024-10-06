@@ -6,6 +6,7 @@ from django.views.generic import ListView, DetailView, CreateView, DeleteView
 
 class DashboardListViews(ListView):
     model = Prediction
+    paginate_by = 5
     template_name = 'dashboard/dashboard.html'
     context_object_name = 'predictions'
 
@@ -16,14 +17,13 @@ class DashboardListViews(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user = self.request.user
-        if user.is_authenticated:
-            context['offers'] = PredictionOffer.objects.filter(user=user)
+        context['action'] = 'dashboard'
         return context
 
-class DashboardOfferListViews(ListView):
+class DashboardMyFeedbackViews(ListView):
     model = PredictionOffer
-    template_name = 'dashboard/dashboard_my_offer.html'
+    paginate_by = 5
+    template_name = 'dashboard/dashboard_my_feedback.html'
     context_object_name = 'offers'
 
     def get_queryset(self):
@@ -33,7 +33,21 @@ class DashboardOfferListViews(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['action'] = 'my_feedback'
+        return context
+
+class DashboardUserFeedbackViews(ListView):
+    model = PredictionOffer
+    paginate_by = 5
+    template_name = 'dashboard/dashboard_user_feedback.html'
+    context_object_name = 'offers'
+
+    def get_queryset(self):
         user = self.request.user
         if user.is_authenticated:
-            context['predictions'] = Prediction.objects.filter(user=user)
+            return PredictionOffer.objects.filter(prediction__user=user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['action'] = 'user_feedback'
         return context

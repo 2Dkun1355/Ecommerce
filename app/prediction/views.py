@@ -73,7 +73,7 @@ class PredictionOfferCreateViews(CreateView):
 
 class PredictionOfferDeleteViews(DeleteView):
     model = PredictionOffer
-    success_url = reverse_lazy('dashboard_offer')
+    success_url = reverse_lazy('dashboard_my_feedback')
 
     def get(self, request, *arge, **kwargs):
         return self.delete(request, *arge, **kwargs)
