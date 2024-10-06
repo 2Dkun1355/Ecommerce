@@ -11,8 +11,8 @@
 					<h1 class="product-title text-center mb-4">{{ object.title }}</h1>
 					<div class="product-meta text-center mb-3">
 						<ul class="list-inline">
-							<li class="list-inline-item"><i class="fa fa-user-o"></i> By {{ object.user.username }}</li>
-							<li class="list-inline-item"><i class="fa fa-location-arrow"></i> Location: {{ object.location }}</li>
+							<li class="list-inline-item"><i class="fa fa-user-o"></i> Від {{ object.user.username }}</li>
+							<li class="list-inline-item"><i class="fa fa-location-arrow"></i> Місто: {{ object.location }}</li>
 						</ul>
 					</div>
 
@@ -32,7 +32,7 @@
 <!--							</li>-->
 <!--						</ul>-->
 						<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-							<h3 class="tab-title mb-4">Description</h3>
+							<h3 class="tab-title mb-4">Опис</h3>
 							<p>{{ object.description }}</p>
 						</div>
 					</div>
@@ -44,7 +44,7 @@
 				<div class="sidebar">
 					<!-- Price Widget -->
 					<div class="widget price text-center p-4 bg-primary text-white shadow-sm rounded mb-4">
-						<h4>Price</h4>
+						<h4>Ціна</h4>
 						<p class="display-4">{{ object.price }} $</p>
 					</div>
 
@@ -58,7 +58,7 @@
 									{{ form.as_p }}
 								</div>
 								<div class="btn-grounp">
-									<button type="submit" class="btn btn-primary mt-2">SUBMIT</button>
+									<button type="submit" class="btn btn-primary mt-2">Відправити</button>
 								</div>
 							</fieldset>
 						</form>

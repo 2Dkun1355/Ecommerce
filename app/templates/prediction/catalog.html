@@ -40,8 +40,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="search-result bg-white">
-                    <h2>Results For "Electronics"</h2>
-                    <p>{{ predictions|length }} Results on Today</p>
+                    <h2>Оголошення</h2>
+                    <p>{{ predictions|length }} знайдено на <time>{% now "d F Y р." %}</time></p>
                 </div>
             </div>
         </div>
@@ -49,12 +49,9 @@
             <div class="col-lg-3 col-md-4">
                 <div class="category-sidebar">
                     <div class="widget category-list">
-                        <h4 class="widget-header">All Category</h4>
+                        <h4 class="widget-header">Категорії</h4>
                         <ul class="category-list">
-                            <li><a href="category.html">Laptops <span>93</span></a></li>
-                            <li><a href="category.html">Iphone <span>233</span></a></li>
-                            <li><a href="category.html">Microsoft <span>183</span></a></li>
-                            <li><a href="category.html">Monitors <span>343</span></a></li>
+                            <li><a href="{% url 'catalog' %}">Всі<span>{{ predictions|length }}</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -63,12 +60,9 @@
                 <div class="category-search-filter bg-white">
                     <div class="row">
                         <div class="col-md-6 text-center text-md-left">
-                            <strong>Short</strong>
+                            <strong>Сортування</strong>
                             <select>
-                                <option>Most Recent</option>
-                                <option value="1">Most Popular</option>
-                                <option value="2">Lowest Price</option>
-                                <option value="4">Highest Price</option>
+                                <option>Найновіші</option>
                             </select>
                         </div>
                     </div>
@@ -76,12 +70,11 @@
                 <div class="product-grid-list">
                     <div class="row mt-30">
                         {% for prediction in predictions %}
-                            {% if prediction.is_active %}
                                 <div class="col-lg-4 col-md-6">
                                     <div class="product-item bg-light">
                                         <div class="card">
                                             <div class="thumb-content">
-                                                <div class="price">{{ prediction.price }}</div>
+                                                <div class="price">{{ prediction.price }} $</div>
                                                     <img class="card-img-top img-fluid"
      														src="{% if prediction.image %} {{ prediction.image.url }} {% else %} /static/images/prediction_default.jpg {% endif %}"
      														style="width: 300px; height: 200px; object-fit: cover;">
@@ -90,7 +83,7 @@
                                                 <h4 class="card-title"><a href="{{ prediction.get_detail_url }}">{{ prediction.title|slice:":20" }}</a></h4>
                                                 <ul class="list-inline product-meta">
                                                     <li class="list-inline-item">
-                                                        <i class="fa fa-calendar"></i>{{ prediction.published_date }}
+                                                        <i class="fa fa-calendar"></i> {{ prediction.published_date }}
                                                     </li>
                                                 </ul>
                                                 <p class="card-text">{{ prediction.description|slice:":50" }}</p>
@@ -98,7 +91,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>

@@ -53,36 +53,27 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav ml-auto main-nav ">
 							<li class="nav-item @@home">
-								<a class="nav-link" href="index.html">Home</a>
+								<a class="nav-link" href="{% url 'catalog' %}">Оголошення</a>
 							</li>
-							<li class="nav-item dropdown dropdown-slide @@dashboard">
-								<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#!">Dashboard<span><i class="fa fa-angle-down"></i></span>
-								</a>
-
-								<!-- Dropdown list -->
-								<ul class="dropdown-menu">
-                                    <li><a class="dropdown-item @@dashboardPage" href="{% url 'dashboard' %}">Dashboard</a></li>
-								</ul>
-							</li>
-							<li class="nav-item dropdown dropdown-slide @@pages">
-								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Pages <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-							</li>
-							<li class="nav-item dropdown dropdown-slide active">
-								<a class="nav-link dropdown-toggle" href="#!" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Listing <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-							</li>
+<!--                            <li class="nav-item @@home">-->
+<!--								<a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>-->
+<!--							</li>-->
 						</ul>
 						<ul class="navbar-nav ml-auto mt-10">
+                            {% if not user.is_authenticated %}
 							<li class="nav-item">
-								<a class="nav-link login-button" href="login.html">Login</a>
+								    <a class="nav-link login-button" href="{% url 'login' %}">Увійти</a>
 							</li>
+                            <li class="nav-item">
+                                    <a class="nav-link login-button" href="{% url 'signup' %}">Зареєструватися</a>
+							</li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link login-button" href="{% url 'dashboard' %}">{{ user.username }}</a>
+							</li>
+                            {% endif %}
 							<li class="nav-item">
-								<a class="nav-link text-white add-button" href="{% url 'prediction_create' %}"><i class="fa fa-plus-circle"></i> Add Listing</a>
+								<a class="nav-link text-white add-button" href="{% url 'prediction_create' %}"><i class="fa fa-plus-circle"></i> Додати оголошення</a>
 
 							</li>
 						</ul>

@@ -10,41 +10,41 @@
       <fieldset class="border bg-white px-4 py-4 mb-5" style="width: 80%; margin: 0 auto;">
         <div class="row">
           <div class="col-lg-12 text-center">
-            <h3>Prediction Form</h3>
+            <h3>Ваше оголошення</h3>
           </div>
           <div class="col-lg-6 mx-auto">
-            <h6 class="font-weight-bold pt-4 pb-1">Title:</h6>
+            <h6 class="font-weight-bold pt-4 pb-1">Назва:</h6>
             {{ form.title }}
-            <h6 class="font-weight-bold pt-4 pb-1">Description:</h6>
-            {{form.description}}
+            <h6 class="font-weight-bold pt-4 pb-1">Опис:</h6>
+            {{ form.description }}
             <div class="price">
               <div class="row px-12 d-flex align-items-center">
                 <div class="col-lg-6 mx-auto my-2">
-                  <h6 class="font-weight-bold pt-4 pb-1">Location:</h6>
+                  <h6 class="font-weight-bold pt-4 pb-1">Місто:</h6>
                     {{ form.location }}
                 </div>
                 <div class="col-lg-6 mx-auto my-2 ml-2">
-                  <h6 class="font-weight-bold pt-4 pb-1">Price:</h6>
+                  <h6 class="font-weight-bold pt-4 pb-1">Ціна:</h6>
                     {{ form.price }}
                 </div>
               </div>
             </div>
             <div class="choose-file text-center my-4 py-4 rounded bg-white">
               <label for="file-upload">
-                <span class="d-block font-weight-bold text-dark">Drop files anywhere to upload</span>
-                <span class="d-block">or</span>
-                <span class="d-block btn bg-primary text-white my-3 select-files">Select files</span>
-                <span class="d-block">Maximum upload file size: 500 KB</span>
+                <span class="d-block font-weight-bold text-dark">Перетягніть файли будь-де, щоб завантажити</span>
+                <span class="d-block">або</span>
+                <span class="d-block btn bg-primary text-white my-3 select-files">Виберіть файли</span>
+                <span class="d-block">Максимальний розмір файлу для завантаження: 500 КБ</span>
                 {{ form.image }}
               </label>
             </div>
             <div class="form-check form-check-inline">
-              <h6 class="form-check-label font-weight-bold mr-2" for="id_is_active">Active:</h6>
+              <h6 class="form-check-label font-weight-bold mr-2" for="id_is_active">Активність:</h6>
               {{ form.is_active }}
             </div>
           </div>
         </div>
-          <button type="submit" class="btn btn-primary" style="width: 450px; margin: 20px auto 0; display: block;">Post</button>
+          <button type="submit" class="btn btn-primary" style="width: 450px; margin: 20px auto 0; display: block;">Зберегти</button>
       </fieldset>
       <!-- Post Your ad end -->
     </form>

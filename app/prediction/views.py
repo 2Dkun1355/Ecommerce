@@ -3,7 +3,7 @@ from django.template.context_processors import request
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from prediction.forms import PredictionOfferForm, PredictionForm
-from prediction.models import Prediction
+from prediction.models import Prediction, PredictionOffer
 
 
 class PredictionListViews(ListView):
@@ -29,12 +29,6 @@ class PredictionDetailViews(DetailView):
         context_data['form'] = form
         return context_data
 
-
-class PredictionOfferCreateViews(CreateView):
-    form_class = PredictionOfferForm
-    success_url = reverse_lazy('catalog')
-
-
 class PredictionCreateViews(CreateView):
     form_class = PredictionForm
     template_name = 'prediction/create.html'
@@ -50,12 +44,11 @@ class PredictionCreateViews(CreateView):
         context_data['form'] = form
         return context_data
 
-
 class PredictionUpdateViews(UpdateView):
     model = Prediction
     form_class = PredictionForm
     template_name = 'prediction/create.html'
-    success_url = reverse_lazy('detail')
+    success_url = reverse_lazy('dashboard')
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data()
@@ -66,7 +59,21 @@ class PredictionUpdateViews(UpdateView):
         context_data['form'] = form
         return context_data
 
-
 class PredictionDeleteViews(DeleteView):
     model = Prediction
-    success_url = reverse_lazy('detail')
+    success_url = reverse_lazy('dashboard')
+
+    def get(self, request, *arge, **kwargs):
+        return self.delete(request, *arge, **kwargs)
+
+
+class PredictionOfferCreateViews(CreateView):
+    form_class = PredictionOfferForm
+    success_url = reverse_lazy('catalog')
+
+class PredictionOfferDeleteViews(DeleteView):
+    model = PredictionOffer
+    success_url = reverse_lazy('dashboard_offer')
+
+    def get(self, request, *arge, **kwargs):
+        return self.delete(request, *arge, **kwargs)
