@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.template.defaultfilters import title
 from django.urls import reverse
 
 UserModel = get_user_model()
@@ -14,6 +15,7 @@ class Prediction(models.Model):
     published_date = models.DateField(auto_now_add=True)
     update_date = models.DateField(auto_now=True)
     is_active = models.BooleanField(default=True)
+    category = models.ForeignKey('PredictionCategory', on_delete=models.CASCADE, null=True, blank=True)
 
     def get_detail_url(self):
         return reverse('detail', kwargs={'pk': self.pk})
@@ -33,3 +35,9 @@ class PredictionOffer(models.Model):
 
     def get_delete_url(self):
         return reverse('offer_delete', kwargs={'pk': self.pk})
+
+class PredictionCategory(models.Model):
+    title = models.CharField(max_length=24)
+
+    def __str__(self):
+        return self.title

@@ -41,7 +41,7 @@
             <div class="col-md-12">
                 <div class="search-result bg-white">
                     <h2>Оголошення</h2>
-                    <p>{{ predictions|length }} знайдено на <time>{% now "d F Y р." %}</time></p>
+                    <p>{{ page_obj|length }} знайдено на <time>{% now "d F Y р." %}</time></p>
                 </div>
             </div>
         </div>
@@ -51,7 +51,10 @@
                     <div class="widget category-list">
                         <h4 class="widget-header">Категорії</h4>
                         <ul class="category-list">
-                            <li><a href="{% url 'catalog' %}">Всі<span>{{ predictions|length }}</span></a></li>
+                            <li><a href="{% url 'catalog' %}">Всі<span>{{ prediction|length }}</span></a></li>
+                            {% for category in categories %}
+                                <li><a href="?category={{ category.title }}">{{ category }}<span>{{ category.prediction_count }}</span></a></li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
@@ -69,7 +72,7 @@
                 </div>
                 <div class="product-grid-list">
                     <div class="row mt-30">
-                        {% for prediction in predictions %}
+                        {% for prediction in page_obj %}
                                 <div class="col-lg-4 col-md-6">
                                     <div class="product-item bg-light">
                                         <div class="card">
@@ -94,27 +97,9 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="pagination justify-content-center">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="category.html" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="category.html">1</a></li>
-                            <li class="page-item"><a class="page-link" href="category.html">2</a></li>
-                            <li class="page-item"><a class="page-link" href="category.html">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="category.html" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+                <!-- pagination -->
+                {% include 'pagination.html' %}
+                <!-- pagination -->
             </div>
         </div>
     </div>

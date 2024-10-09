@@ -1,5 +1,5 @@
 from django.contrib import admin
-from prediction.models import Prediction, PredictionOffer
+from prediction.models import Prediction, PredictionOffer, PredictionCategory
 
 
 class PredictionAdmin(admin.ModelAdmin):
@@ -12,6 +12,9 @@ class PredictionOfferAdmin(admin.ModelAdmin):
     search_fields = ['user', 'prediction', 'phone']
     list_filter = ['offer_date']
 
+class PredictionCategoryAdmin(admin.ModelAdmin):
+    list_display = ['title']
 
 admin.site.register(Prediction, PredictionAdmin)
 admin.site.register(PredictionOffer, PredictionOfferAdmin)
+admin.site.register(PredictionCategory, PredictionCategoryAdmin)

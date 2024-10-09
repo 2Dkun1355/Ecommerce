@@ -1,18 +1,34 @@
 from audioop import reverse
+from unicodedata import category
+
+from django.db.models import Count
 from django.template.context_processors import request
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from prediction.forms import PredictionOfferForm, PredictionForm
-from prediction.models import Prediction, PredictionOffer
+from prediction.models import Prediction, PredictionOffer, PredictionCategory
 
 
 class PredictionListViews(ListView):
     model = Prediction
+    paginate_by = 9
     template_name = 'prediction/catalog.html'
     context_object_name = 'predictions'
 
     def get_queryset(self):
-        return Prediction.objects.filter(is_active=True)
+        queryset = Prediction.objects.filter(is_active=True)
+        category_title = self.request.GET.get('category')
+
+        if category_title:
+            queryset = queryset.filter(category__title=category_title)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = PredictionCategory.objects.annotate(prediction_count=Count('prediction'))
+        context['prediction'] = Prediction.objects.all()
+        return context
 
 
 class PredictionDetailViews(DetailView):
