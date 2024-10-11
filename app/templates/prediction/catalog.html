@@ -41,7 +41,7 @@
             <div class="col-md-12">
                 <div class="search-result bg-white">
                     <h2>Оголошення</h2>
-                    <p>{{ page_obj|length }} знайдено на <time>{% now "d F Y р." %}</time></p>
+                    <p>{{ prediction|length }} знайдено на <time>{% now "d F Y р." %}</time></p>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
                         <ul class="category-list">
                             <li><a href="{% url 'catalog' %}">Всі<span>{{ prediction|length }}</span></a></li>
                             {% for category in categories %}
-                                <li><a href="?category={{ category.title }}">{{ category }}<span>{{ category.prediction_count }}</span></a></li>
+                                <li><a href="?category={{ category.slug }}">{{ category }}<span>{{ category.prediction_count }}</span></a></li>
                             {% endfor %}
                         </ul>
                     </div>

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section bg-gray">
+	<div class="container">
+		<div class="row">
+			{% include 'dashboard/dashboard_sidebar.html' %}
+			<div class="col-lg-8">
+				<!-- Edit Profile Welcome Text -->
+				<div class="widget welcome-message">
+					<h2>Налаштування акаунту</h2>
+				</div>
+				<!-- Edit Personal Info -->
+				<div class="row">
+					<div class="col-lg-6 col-md-6">
+						<div class="widget personal-info">
+							<h3 class="widget-header user">Введіть свої дані</h3>
+							<form method='post'>
+								{% csrf_token %}
+								<!-- First Name -->
+								<div class="form-group">
+									<label>І'мя</label>
+									{{ form.first_name }}
+								</div>
+								<!-- Last Name -->
+								<div class="form-group">
+									<label>Прізвище</label>
+									{{ form.last_name }}
+								</div>
+								<div class="form-group">
+									<label>Телефон</label>
+									{{ form.phone }}
+								</div>
+								<button class="btn btn-transparent">Зберегти</button>
+							</form>
+						</div>
+					</div>
+<!--					<div class="col-lg-6 col-md-6">-->
+<!--						&lt;!&ndash; Change Password &ndash;&gt;-->
+<!--					<div class="widget change-password">-->
+<!--						<h3 class="widget-header user">Edit Password</h3>-->
+<!--						<form action="#">-->
+<!--							&lt;!&ndash; Current Password &ndash;&gt;-->
+<!--							<div class="form-group">-->
+<!--								<label for="current-password">Current Password</label>-->
+<!--								<input type="password" class="form-control" id="current-password">-->
+<!--							</div>-->
+<!--							&lt;!&ndash; New Password &ndash;&gt;-->
+<!--							<div class="form-group">-->
+<!--								<label for="new-password">New Password</label>-->
+<!--								<input type="password" class="form-control" id="new-password">-->
+<!--							</div>-->
+<!--							&lt;!&ndash; Confirm New Password &ndash;&gt;-->
+<!--							<div class="form-group">-->
+<!--								<label for="confirm-password">Confirm New Password</label>-->
+<!--								<input type="password" class="form-control" id="confirm-password">-->
+<!--							</div>-->
+<!--							&lt;!&ndash; Submit Button &ndash;&gt;-->
+<!--							<button class="btn btn-transparent">Change Password</button>-->
+<!--						</form>-->
+<!--					</div>-->
+<!--					</div>-->
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

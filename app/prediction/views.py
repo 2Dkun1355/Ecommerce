@@ -1,6 +1,4 @@
 from audioop import reverse
-from unicodedata import category
-
 from django.db.models import Count
 from django.template.context_processors import request
 from django.urls import reverse_lazy
@@ -17,10 +15,10 @@ class PredictionListViews(ListView):
 
     def get_queryset(self):
         queryset = Prediction.objects.filter(is_active=True)
-        category_title = self.request.GET.get('category')
+        category_slug = self.request.GET.get('category')
 
-        if category_title:
-            queryset = queryset.filter(category__title=category_title)
+        if category_slug:
+            queryset = queryset.filter(category__slug=category_slug)
 
         return queryset
 

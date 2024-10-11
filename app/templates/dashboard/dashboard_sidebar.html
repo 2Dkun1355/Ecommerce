@@ -9,7 +9,7 @@
             <!-- User Name -->
             <h5 class="text-center">{{ user.last_name }} {{ user.first_name }}</h5>
             <p><time>{{ user.date_joined|date:"d F Y" }}</time></p>
-            <a href="user-profile.html" class="btn btn-main-sm">Налаштувати аккаунт</a>
+            <a href="{% url 'user_profile' user.username %}" class="btn btn-main-sm">Налаштувати аккаунт</a>
           </div>
           <!-- Dashboard Links -->
           <div class="widget user-dashboard-menu">
