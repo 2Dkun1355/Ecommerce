@@ -17,6 +17,11 @@ class Prediction(models.Model):
     is_active = models.BooleanField(default=True)
     category = models.ForeignKey('PredictionCategory', on_delete=models.CASCADE, null=True, blank=True)
 
+    def validate(self):
+        words_blacklist = ['яблуко']
+        words = self.title.split(' ')
+        return bool(set(words) & set(words_blacklist))
+
     def get_detail_url(self):
         return reverse('detail', kwargs={'pk': self.pk})
 
@@ -26,6 +31,10 @@ class Prediction(models.Model):
     def get_delete_url(self):
         return reverse('prediction_delete', kwargs={'pk': self.pk})
 
+    def save(self, *args, **kwargs):
+        # self.slug = slugify(self.title)
+        self.is_active = self.validate()
+        super().save(*args, **kwargs)
 
 class PredictionOffer(models.Model):
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE, null=True, blank=True)

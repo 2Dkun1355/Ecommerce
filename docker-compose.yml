@@ -24,5 +24,33 @@ services:
     depends_on:
       - db
 
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+
+  celery:
+    build: ./app
+    env_file: ./.env
+    command: celery -A config worker -l info
+    volumes:
+      - ./app:/app
+    depends_on:
+      - db
+      - redis
+
+  celery-beat:
+    build: ./app
+    env_file: ./.env
+    command: celery -A config beat -l info -S django
+    volumes:
+      - ./app:/app
+    depends_on:
+      - db
+      - redis
+      - celery
+
+
+
 volumes:
   db_data:
