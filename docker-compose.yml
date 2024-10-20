@@ -50,7 +50,18 @@ services:
       - redis
       - celery
 
-
+  flower:
+    image: mher/flower:0.9.7
+    env_file: ./.env
+    command: ['flower', '--broker=redis://redis:6379', '--port=5555']
+    ports:
+      - "5555:5555"
+    depends_on:
+      - db
+      - redis
+      - celery
+      - celery-beat
+      - app
 
 volumes:
   db_data:
