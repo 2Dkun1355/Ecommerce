@@ -31,35 +31,36 @@
 									<label>Телефон</label>
 									{{ form.phone }}
 								</div>
-								<button class="btn btn-transparent">Зберегти</button>
+								<button class="btn btn-primary" name="save_profile">Зберегти</button>
 							</form>
 						</div>
 					</div>
-<!--					<div class="col-lg-6 col-md-6">-->
-<!--						&lt;!&ndash; Change Password &ndash;&gt;-->
-<!--					<div class="widget change-password">-->
-<!--						<h3 class="widget-header user">Edit Password</h3>-->
-<!--						<form action="#">-->
-<!--							&lt;!&ndash; Current Password &ndash;&gt;-->
-<!--							<div class="form-group">-->
-<!--								<label for="current-password">Current Password</label>-->
-<!--								<input type="password" class="form-control" id="current-password">-->
-<!--							</div>-->
-<!--							&lt;!&ndash; New Password &ndash;&gt;-->
-<!--							<div class="form-group">-->
-<!--								<label for="new-password">New Password</label>-->
-<!--								<input type="password" class="form-control" id="new-password">-->
-<!--							</div>-->
-<!--							&lt;!&ndash; Confirm New Password &ndash;&gt;-->
-<!--							<div class="form-group">-->
-<!--								<label for="confirm-password">Confirm New Password</label>-->
-<!--								<input type="password" class="form-control" id="confirm-password">-->
-<!--							</div>-->
-<!--							&lt;!&ndash; Submit Button &ndash;&gt;-->
-<!--							<button class="btn btn-transparent">Change Password</button>-->
-<!--						</form>-->
-<!--					</div>-->
-<!--					</div>-->
+					<div class="col-lg-6 col-md-6">
+						<!-- Change Password -->
+					<div class="widget change-password">
+						<h3 class="widget-header user">Змінити пароль</h3>
+						<form method="post">
+    						{% csrf_token %}
+							<!-- Current Password -->
+							<div class="form-group">
+								<label>Пароль</label>
+								<input type="password" name="old_password" class="form-control bg-white">
+							</div>
+							<!-- New Password -->
+							<div class="form-group">
+								<label>Новий Пароль</label>
+								 <input type="password" name="new_password1" class="form-control bg-white">
+							</div>
+							<!-- Confirm New Password -->
+							<div class="form-group">
+								<label>Повторіть Новий Пароль</label>
+								<input type="password" name="new_password2" class="form-control bg-white">
+							</div>
+							<!-- Submit Button -->
+							<button class="btn btn-primary" name="save_password">Змінити Пароль</button>
+						</form>
+					</div>
+					</div>
 				</div>
 			</div>
 		</div>

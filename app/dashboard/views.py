@@ -54,12 +54,3 @@ class DashboardUserFeedbackViews(ListView):
         context['action'] = 'user_feedback'
         return context
 
-class UserProfileUpdateView(UpdateView):
-    model = get_user_model()
-    form_class = CustomUserUpdateForm
-    template_name = 'dashboard/dashboard_user_profile.html'
-    success_url = reverse_lazy('dashboard')
-
-    def get_object(self, queryset=None):
-        username = self.kwargs.get('username')
-        return get_object_or_404(self.model, username=username)
