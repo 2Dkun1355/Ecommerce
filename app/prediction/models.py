@@ -17,6 +17,9 @@ class Prediction(models.Model):
     is_active = models.BooleanField(default=True)
     category = models.ForeignKey('PredictionCategory', on_delete=models.CASCADE, null=True, blank=True)
 
+    def __str__(self):
+        return self.title
+
     def get_detail_url(self):
         return reverse('detail', kwargs={'pk': self.pk})
 

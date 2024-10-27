@@ -24,5 +24,44 @@ services:
     depends_on:
       - db
 
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+
+  celery:
+    build: ./app
+    env_file: ./.env
+    command: celery -A config worker -l info
+    volumes:
+      - ./app:/app
+    depends_on:
+      - db
+      - redis
+
+  celery-beat:
+    build: ./app
+    env_file: ./.env
+    command: celery -A config beat -l info -S django
+    volumes:
+      - ./app:/app
+    depends_on:
+      - db
+      - redis
+      - celery
+
+  flower:
+    image: mher/flower:0.9.7
+    env_file: ./.env
+    command: ['flower', '--broker=redis://redis:6379', '--port=5555']
+    ports:
+      - "5555:5555"
+    depends_on:
+      - db
+      - redis
+      - celery
+      - celery-beat
+      - app
+
 volumes:
   db_data:

@@ -1,10 +1,9 @@
-from audioop import reverse
 from django.db.models import Count
-from django.template.context_processors import request
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from prediction.forms import PredictionOfferForm, PredictionForm
 from prediction.models import Prediction, PredictionOffer, PredictionCategory
+from prediction.utils import creation_prediction
 
 
 class PredictionListViews(ListView):
@@ -12,20 +11,26 @@ class PredictionListViews(ListView):
     paginate_by = 9
     template_name = 'prediction/catalog.html'
     context_object_name = 'predictions'
+    # creation_prediction()
 
     def get_queryset(self):
         queryset = Prediction.objects.filter(is_active=True)
         category_slug = self.request.GET.get('category')
+        location = self.request.GET.get('location')
 
         if category_slug:
             queryset = queryset.filter(category__slug=category_slug)
+
+        if location:
+            queryset = queryset.filter(location=location)
 
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['categories'] = PredictionCategory.objects.annotate(prediction_count=Count('prediction'))
+        context['categories'] = PredictionCategory.objects.annotate(count=Count('prediction'))
         context['prediction'] = Prediction.objects.all()
+        context['locations'] = Prediction.objects.values('location').annotate(count=Count('id'))
         return context
 
 
